@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.ghostreborn.akiratv"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.ghostreborn.akiratv"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -39,4 +39,5 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.leanback)
     implementation(libs.glide)
+    implementation(libs.androidx.cardview)
 }
