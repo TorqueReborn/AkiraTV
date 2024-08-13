@@ -3,7 +3,6 @@ package com.ghostreborn.akiratv.presenter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
@@ -20,10 +19,10 @@ class AnimePresenter : Presenter() {
     override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
         when (item) {
             is Anime -> {
-                val imageCard = viewHolder.view as LinearLayout
-                imageCard.isFocusable = true
-                val title = imageCard.findViewById<TextView>(R.id.card_title)
-                val thumbnail = imageCard.findViewById<ImageView>(R.id.card_thumbnail)
+                viewHolder.view.isFocusable = true
+                viewHolder.view.isFocusableInTouchMode = true
+                val title = viewHolder.view.findViewById<TextView>(R.id.card_title)
+                val thumbnail = viewHolder.view.findViewById<ImageView>(R.id.card_thumbnail)
                 title.text = item.name
                 Glide.with(viewHolder.view.context)
                     .load(item.thumbnail)
