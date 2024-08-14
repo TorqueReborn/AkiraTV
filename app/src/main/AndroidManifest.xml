@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AkiraTV">
         <activity
-            android:name=".AnimeDetailsActivity"
+            android:name=".ui.AnimeDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

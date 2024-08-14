@@ -10,7 +10,7 @@ import androidx.leanback.widget.OnItemViewClickedListener
 import androidx.leanback.widget.Presenter
 import androidx.leanback.widget.Row
 import androidx.leanback.widget.RowPresenter
-import com.ghostreborn.akiratv.AnimeDetailsActivity
+import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
 import com.ghostreborn.akiratv.presenter.AnimePresenter
 import kotlinx.coroutines.CoroutineScope
