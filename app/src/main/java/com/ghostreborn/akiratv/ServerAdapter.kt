@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ghostreborn.akiratv.ui.PlayActivity
 
 class ServerAdapter (private val sourceUrls: List<String>) :
     RecyclerView.Adapter<ServerAdapter.AnimeViewHolder>() {
@@ -25,6 +26,11 @@ class ServerAdapter (private val sourceUrls: List<String>) :
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val server = sourceUrls[position]
         holder.serverTextView.text = server
+        holder.serverTextView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, PlayActivity::class.java)
+            intent.putExtra("sourceUrl", server)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
 }
