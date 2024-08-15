@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.leanback.app.VideoSupportFragment
 import androidx.leanback.app.VideoSupportFragmentGlueHost
 import androidx.leanback.media.MediaPlayerAdapter
-import androidx.leanback.media.PlaybackTransportControlGlue
 import androidx.leanback.widget.PlaybackControlsRow
+import com.ghostreborn.akiratv.AkiraPlaybackGlue
 
 class PlayEpisodeFragment : VideoSupportFragment() {
-    private lateinit var mTransportControlGlue: PlaybackTransportControlGlue<MediaPlayerAdapter>
+    private lateinit var mTransportControlGlue: AkiraPlaybackGlue
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class PlayEpisodeFragment : VideoSupportFragment() {
         val playerAdapter = MediaPlayerAdapter(activity)
         playerAdapter.setRepeatAction(PlaybackControlsRow.RepeatAction.INDEX_NONE)
 
-        mTransportControlGlue = PlaybackTransportControlGlue(activity, playerAdapter)
+        mTransportControlGlue = AkiraPlaybackGlue(requireContext(), playerAdapter)
         mTransportControlGlue.host = glueHost
         mTransportControlGlue.title = "Episode Title"
         mTransportControlGlue.subtitle = "Episode Description"
