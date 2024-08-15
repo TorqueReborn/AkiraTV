@@ -51,4 +51,29 @@ class AllAnimeParser {
             sequel = sequel
         )
     }
+
+    fun episodes(id: String): ArrayList<ArrayList<String>> {
+        val episodesArray = JSONObject(AllAnimeNetwork().episodes(id).toString())
+            .getJSONObject("data")
+            .getJSONObject("show")
+            .getJSONObject("availableEpisodesDetail")
+            .getJSONArray("sub")
+        val episodeList = ArrayList<String>().apply {
+            for (i in episodesArray.length() - 1 downTo 0) {
+                add(episodesArray.getString(i))
+            }
+        }
+        return groupEpisodes(episodeList)
+    }
+
+    private fun groupEpisodes(episodeList: ArrayList<String>): ArrayList<ArrayList<String>> {
+        val group = ArrayList<ArrayList<String>>()
+        var startIndex = 0
+        while (startIndex < episodeList.size) {
+            val endIndex = (startIndex + 15).coerceAtMost(episodeList.size)
+            group.add(ArrayList(episodeList.subList(startIndex, endIndex)))
+            startIndex = endIndex
+        }
+        return group
+    }
 }

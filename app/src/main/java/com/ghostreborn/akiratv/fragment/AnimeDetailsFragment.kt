@@ -1,17 +1,18 @@
 package com.ghostreborn.akiratv.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.leanback.widget.ArrayObjectAdapter
-import androidx.leanback.widget.ListRow
 import com.bumptech.glide.Glide
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
-import com.ghostreborn.akiratv.presenter.AnimePresenter
+import com.ghostreborn.akiratv.ui.EpisodesActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,12 +39,16 @@ class AnimeDetailsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val animeDetails = AllAnimeParser().animeDetails(MainFragment.allAnimeID)
             withContext(Dispatchers.Main) {
+                view.findViewById<TextView>(R.id.anime_name).text = animeDetails.name
                 Glide.with(requireContext())
                     .load(animeDetails.banner)
                     .into(animeBanner)
                 Glide.with(requireContext())
                     .load(animeDetails.thumbnail)
                     .into(animeThumbnail)
+                view.findViewById<Button>(R.id.watch_button).setOnClickListener {
+                    startActivity(Intent(requireContext(), EpisodesActivity::class.java))
+                }
             }
         }
     }

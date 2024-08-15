@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,18 +8,53 @@
         android:id="@+id/anime_banner"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:contentDescription="@string/anime_banner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/default_background" />
 
-    <ImageView
-        android:id="@+id/anime_thumbnail"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/anime_image_card"
+        android:layout_width="180dp"
+        android:layout_height="260dp"
         android:layout_marginStart="32dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/anime_banner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/anime_banner"
-        app:srcCompat="@drawable/lb_background" />
+        app:layout_constraintTop_toBottomOf="@+id/anime_banner">
+
+        <ImageView
+            android:id="@+id/anime_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/anime_thumbnail"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/lb_background" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/anime_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:singleLine="true"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/anime_image_card"
+        app:layout_constraintTop_toBottomOf="@+id/anime_banner" />
+
+    <Button
+        android:id="@+id/watch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/watch"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="@+id/anime_name"
+        app:layout_constraintTop_toBottomOf="@+id/anime_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

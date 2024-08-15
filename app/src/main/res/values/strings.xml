@@ -18,4 +18,6 @@
     <string name="dismiss_error">Dismiss</string>
     <string name="anime_thumbnail">Anime Thumbnail</string>
     <string name="anime_title">Anime Title</string>
+    <string name="watch">Watch</string>
+    <string name="anime_banner">Anime Banner</string>
 </resources>

@@ -30,7 +30,7 @@ class MainFragment : BrowseSupportFragment() {
         headersState = HEADERS_DISABLED
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         CoroutineScope(Dispatchers.IO).launch {
-            val list = AllAnimeParser().searchAnime("")
+            val list = AllAnimeParser().searchAnime("One Piece")
             val chunkSize = 4
             val chunkedLists = list.chunked(chunkSize)
             withContext(Dispatchers.Main) {
