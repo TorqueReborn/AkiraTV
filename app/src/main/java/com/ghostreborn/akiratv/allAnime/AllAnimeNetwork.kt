@@ -40,4 +40,11 @@ class AllAnimeNetwork {
         val query = "show(_id:\$showId){availableEpisodesDetail}"
         return connectAllAnime(variables, queryTypes, query)
     }
+
+    fun episodeUrls(id: String, episode: String): String? {
+        val variables = "\"showId\":\"$id\",\"episode\":\"$episode\",\"translationType\":\"sub\""
+        val queryTypes = "\$showId:String!,\$episode:String!,\$translationType:VaildTranslationTypeEnumType!"
+        val query = "episode(showId:\$showId,episodeString:\$episode,translationType:\$translationType){sourceUrls}"
+        return connectAllAnime(variables, queryTypes, query)
+    }
 }

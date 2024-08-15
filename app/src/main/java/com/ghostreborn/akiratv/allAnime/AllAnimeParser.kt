@@ -1,9 +1,14 @@
 package com.ghostreborn.akiratv.allAnime
 
+import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.ghostreborn.akiratv.model.Anime
 import com.ghostreborn.akiratv.model.AnimeDetails
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
 
 class AllAnimeParser {
     fun searchAnime(anime: String): ArrayList<Anime> {
@@ -75,5 +80,68 @@ class AllAnimeParser {
             startIndex = endIndex
         }
         return group
+    }
+
+    private fun episodeUrls(id: String, episode: String): List<String> {
+        val sourceUrls = JSONObject(AllAnimeNetwork().episodeUrls(id, episode).toString())
+            .getJSONObject("data")
+            .getJSONObject("episode")
+            .getJSONArray("sourceUrls")
+
+        return (0 until sourceUrls.length())
+            .map { sourceUrls.getJSONObject(it).getString("sourceUrl") }
+            .filter { it.contains("--") }
+            .map {
+                val decrypted =
+                    decryptAllAnimeServer(it.substring(2)).replace("clock", "clock.json")
+                if (!decrypted.contains("fast4speed")) "https://allanime.day$decrypted" else ""
+            }
+            .filter { it.isNotEmpty() }
+    }
+
+    fun getSourceUrls(id: String?, episode: String?): List<String> {
+        return episodeUrls(id!!, episode!!).flatMap { source ->
+            try {
+                val rawJSON = getJSON(source)
+                if (rawJSON == "error") return@flatMap emptyList<String>()
+
+                val linksArray = JSONObject(rawJSON).getJSONArray("links")
+                List(linksArray.length()) { linksArray.getJSONObject(it).getString("link") }
+            } catch (e: JSONException) {
+                Log.e("TAG", "Error parsing JSON: ", e)
+                emptyList()
+            }
+        }
+    }
+
+    private fun getJSON(url: String?): String {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(url ?: return "{}")
+            .header("Referer", "https://allanime.to")
+            .header("Cipher", "AES256-SHA256")
+            .header(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0"
+            )
+            .build()
+
+        return try {
+            client.newCall(request).execute().use { response ->
+                response.body?.string() ?: "NULL"
+            }
+        } catch (e: IOException) {
+            Log.e("TAG", "Error fetching JSON: ", e)
+            "{}"
+        }
+    }
+
+    private fun decryptAllAnimeServer(decrypt: String): String {
+        return buildString {
+            for (i in decrypt.indices step 2) {
+                val dec = decrypt.substring(i, i + 2).toInt(16)
+                append((dec xor 56).toChar())
+            }
+        }
     }
 }
