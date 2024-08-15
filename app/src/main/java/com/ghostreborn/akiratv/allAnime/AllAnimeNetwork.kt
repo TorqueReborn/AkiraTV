@@ -26,4 +26,11 @@ class AllAnimeNetwork {
         val query = "shows(search:\$search,limit:\$limit,page:\$page,translationType:\$translationType,countryOrigin:\$countryOrigin){edges{_id,name,thumbnail}}"
         return connectAllAnime(variables, queryTypes, query)
     }
+
+    fun animeDetails(id: String): String? {
+        val variables = "\"showId\":\"$id\""
+        val queryTypes = "\$showId:String!"
+        val query = "show(_id:\$showId){name,thumbnail,description,banner,relatedShows}"
+        return connectAllAnime(variables, queryTypes, query)
+    }
 }

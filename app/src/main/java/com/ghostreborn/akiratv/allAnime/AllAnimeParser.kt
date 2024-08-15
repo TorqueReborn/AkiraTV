@@ -1,6 +1,8 @@
 package com.ghostreborn.akiratv.allAnime
 
+import androidx.core.text.HtmlCompat
 import com.ghostreborn.akiratv.model.Anime
+import com.ghostreborn.akiratv.model.AnimeDetails
 import org.json.JSONObject
 
 class AllAnimeParser {
@@ -16,5 +18,37 @@ class AllAnimeParser {
                 }
             }
         }
+    }
+
+    fun animeDetails(animeId: String): AnimeDetails {
+        val show = JSONObject(AllAnimeNetwork().animeDetails(animeId).toString())
+            .getJSONObject("data")
+            .getJSONObject("show")
+
+        val description =
+            HtmlCompat.fromHtml(show.getString("description"), HtmlCompat.FROM_HTML_MODE_COMPACT)
+                .toString()
+        val relatedShows = show.getJSONArray("relatedShows")
+
+        var prequel = ""
+        var sequel = ""
+
+        for (i in 0 until relatedShows.length()) {
+            relatedShows.getJSONObject(i).apply {
+                when (getString("relation")) {
+                    "prequel" -> prequel = getString("showId")
+                    "sequel" -> sequel = getString("showId")
+                }
+            }
+        }
+
+        return AnimeDetails(
+            name = show.getString("name"),
+            thumbnail = show.getString("thumbnail"),
+            description = description,
+            banner = show.getString("banner"),
+            prequel = prequel,
+            sequel = sequel
+        )
     }
 }

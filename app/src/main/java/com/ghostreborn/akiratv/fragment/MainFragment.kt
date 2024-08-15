@@ -12,6 +12,7 @@ import androidx.leanback.widget.Row
 import androidx.leanback.widget.RowPresenter
 import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
+import com.ghostreborn.akiratv.model.Anime
 import com.ghostreborn.akiratv.presenter.AnimePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +55,12 @@ class MainFragment : BrowseSupportFragment() {
             rowViewHolder: RowPresenter.ViewHolder?,
             row: Row
         ) {
+            allAnimeID = (item as Anime).id
             startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
         }
+    }
+
+    companion object{
+        var allAnimeID: String = ""
     }
 }
