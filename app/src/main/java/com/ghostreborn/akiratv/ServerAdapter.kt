@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.ui.PlayActivity
 
 class ServerAdapter (private val sourceUrls: List<String>) :
@@ -27,9 +28,8 @@ class ServerAdapter (private val sourceUrls: List<String>) :
         val server = sourceUrls[position]
         holder.serverTextView.text = server
         holder.serverTextView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, PlayActivity::class.java)
-            intent.putExtra("sourceUrl", server)
-            holder.itemView.context.startActivity(intent)
+            MainFragment.episodeUrl = server
+            holder.itemView.context.startActivity(Intent(holder.itemView.context, PlayActivity::class.java))
         }
     }
 

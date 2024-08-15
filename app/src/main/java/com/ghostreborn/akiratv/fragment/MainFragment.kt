@@ -62,5 +62,6 @@ class MainFragment : BrowseSupportFragment() {
 
     companion object{
         var allAnimeID: String = ""
+        var episodeUrl: String = ""
     }
 }
