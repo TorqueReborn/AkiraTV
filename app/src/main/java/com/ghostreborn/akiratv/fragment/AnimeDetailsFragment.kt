@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
+import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 import com.ghostreborn.akiratv.ui.EpisodesActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +51,25 @@ class AnimeDetailsFragment : Fragment() {
                     .into(animeThumbnail)
                 view.findViewById<Button>(R.id.watch_button).setOnClickListener {
                     startActivity(Intent(requireContext(), EpisodesActivity::class.java))
+                }
+                if (animeDetails.prequel.isNotEmpty()) {
+                    view.findViewById<Button>(R.id.prequel_button).apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            animeId = animeDetails.prequel
+                            startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
+                        }
+                    }
+                }
+
+                if (animeDetails.sequel.isNotEmpty()) {
+                    view.findViewById<Button>(R.id.sequel_button).apply {
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            animeId = animeDetails.sequel
+                            startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
+                        }
+                    }
                 }
             }
         }

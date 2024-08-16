@@ -59,4 +59,30 @@
         app:layout_constraintStart_toStartOf="@+id/anime_name"
         app:layout_constraintTop_toBottomOf="@+id/anime_name" />
 
+    <Button
+        android:id="@+id/prequel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/prequel"
+        android:focusable="true"
+        android:visibility="gone"
+        android:stateListAnimator="@animator/size_animator"
+        app:layout_constraintStart_toEndOf="@+id/watch_button"
+        app:layout_constraintTop_toBottomOf="@+id/anime_name" />
+
+    <Button
+        android:id="@+id/sequel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/sequel"
+        android:focusable="true"
+        android:visibility="gone"
+        android:stateListAnimator="@animator/size_animator"
+        app:layout_constraintStart_toEndOf="@+id/prequel_button"
+        app:layout_constraintTop_toBottomOf="@+id/anime_name" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

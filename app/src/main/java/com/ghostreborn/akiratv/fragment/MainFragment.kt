@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val animes = AllAnimeParser().searchAnime("")
+            val animes = AllAnimeParser().searchAnime("One Piece")
             withContext(Dispatchers.Main) {
                 val recyclerView = view.findViewById<RecyclerView>(R.id.main_recycler_view)
                 recyclerView.adapter = AnimeAdapter(animes)

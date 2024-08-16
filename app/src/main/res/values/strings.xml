@@ -20,4 +20,6 @@
     <string name="anime_title">Anime Title</string>
     <string name="watch">Watch</string>
     <string name="anime_banner">Anime Banner</string>
+    <string name="prequel">Prequel</string>
+    <string name="sequel">Sequel</string>
 </resources>
