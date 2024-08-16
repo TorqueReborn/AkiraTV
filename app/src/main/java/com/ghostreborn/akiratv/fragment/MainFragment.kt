@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ghostreborn.akiratv.AnimeAdapter
+import com.ghostreborn.akiratv.adapter.AnimeAdapter
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +35,7 @@ class MainFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 val recyclerView = view.findViewById<RecyclerView>(R.id.main_recycler_view)
                 recyclerView.adapter = AnimeAdapter(animes)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 6)
             }
         }
     }

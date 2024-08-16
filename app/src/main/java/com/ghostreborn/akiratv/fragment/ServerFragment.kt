@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ghostreborn.akiratv.R
-import com.ghostreborn.akiratv.ServerAdapter
+import com.ghostreborn.akiratv.adapter.ServerAdapter
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

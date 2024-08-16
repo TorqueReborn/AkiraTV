@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.ui.PlayActivity
 
