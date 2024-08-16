@@ -22,6 +22,7 @@ class AnimeDetailsFragment : Fragment() {
 
     private lateinit var animeThumbnail: ImageView
     private lateinit var animeBanner: ImageView
+    lateinit var animeId: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,13 +32,14 @@ class AnimeDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.details_layout, container, false)
         animeThumbnail = view.findViewById(R.id.anime_thumbnail)
         animeBanner = view.findViewById(R.id.anime_banner)
+        animeId = arguments?.getString("anime_id") ?: ""
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val animeDetails = AllAnimeParser().animeDetails(MainFragment.allAnimeID)
+            val animeDetails = AllAnimeParser().animeDetails(animeId)
             withContext(Dispatchers.Main) {
                 view.findViewById<TextView>(R.id.anime_name).text = animeDetails.name
                 Glide.with(requireContext())

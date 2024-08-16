@@ -1,5 +1,6 @@
 package com.ghostreborn.akiratv.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ghostreborn.akiratv.R
+import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.model.Anime
+import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 
 class AnimeAdapter(private val animes: ArrayList<Anime>) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
@@ -32,12 +35,16 @@ class AnimeAdapter(private val animes: ArrayList<Anime>) :
         holder.animeNameTextView.text = anime.name
         Glide.with(holder.itemView.context).load(anime.thumbnail).into(holder.animeImageView)
         holder.itemView.isFocusable = true
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AnimeDetailsActivity::class.java)
+            intent.putExtra("anime_id", anime.id)
+            MainFragment.allAnimeID = anime.id
+            holder.itemView.context.startActivity(intent)
+        }
         holder.itemView.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                // Zoom in animation
                 holder.itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start()
             } else {
-                // Zoom outanimation
                 holder.itemView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
             }
         }
