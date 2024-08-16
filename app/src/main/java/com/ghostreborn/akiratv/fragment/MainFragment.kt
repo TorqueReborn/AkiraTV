@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +34,21 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val searchButton = view.findViewById<Button>(R.id.anime_search_button)
+        val searchEditText = view.findViewById<EditText>(R.id.anime_search_edit)
+        recyclerView = view.findViewById(R.id.main_recycler_view)
+
+        searchAnime("")
+        searchButton.setOnClickListener {
+            searchAnime(searchEditText.text.toString())
+        }
+    }
+
+    private fun searchAnime(name: String){
         CoroutineScope(Dispatchers.IO).launch {
-            val animes = AllAnimeParser().searchAnime("One Piece")
+            val anime = AllAnimeParser().searchAnime(name)
             withContext(Dispatchers.Main) {
-                val recyclerView = view.findViewById<RecyclerView>(R.id.main_recycler_view)
-                recyclerView.adapter = AnimeAdapter(animes)
+                recyclerView.adapter = AnimeAdapter(anime)
                 recyclerView.layoutManager = GridLayoutManager(requireContext(), 6)
             }
         }

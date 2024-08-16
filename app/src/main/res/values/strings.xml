@@ -22,4 +22,6 @@
     <string name="anime_banner">Anime Banner</string>
     <string name="prequel">Prequel</string>
     <string name="sequel">Sequel</string>
+    <string name="search">Search</string>
+    <string name="search_anime">Search Anime</string>
 </resources>
