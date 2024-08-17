@@ -8,8 +8,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/anime_image_card"
-        android:layout_width="135dp"
-        android:layout_height="195dp"
+        android:layout_width="220dp"
+        android:layout_height="150dp"
         app:cardCornerRadius="20dp">
 
         <RelativeLayout

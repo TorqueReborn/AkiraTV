@@ -49,7 +49,7 @@ class MainFragment : Fragment() {
             val anime = AllAnimeParser().searchAnime(name)
             withContext(Dispatchers.Main) {
                 recyclerView.adapter = AnimeAdapter(anime)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 6)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
             }
         }
     }
