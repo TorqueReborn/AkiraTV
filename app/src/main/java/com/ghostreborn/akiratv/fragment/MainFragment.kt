@@ -1,61 +1,68 @@
 package com.ghostreborn.akiratv.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ghostreborn.akiratv.adapter.AnimeAdapter
-import com.ghostreborn.akiratv.R
+import androidx.leanback.app.BrowseSupportFragment
+import androidx.leanback.widget.ArrayObjectAdapter
+import androidx.leanback.widget.ListRow
+import androidx.leanback.widget.ListRowPresenter
+import androidx.leanback.widget.OnItemViewClickedListener
+import androidx.leanback.widget.Presenter
+import androidx.leanback.widget.Row
+import androidx.leanback.widget.RowPresenter
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
+import com.ghostreborn.akiratv.model.Anime
+import com.ghostreborn.akiratv.presenter.AnimePresenter
+import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainFragment : Fragment() {
+class MainFragment : BrowseSupportFragment() {
 
-    private lateinit var recyclerView: RecyclerView
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = LayoutInflater
-            .from(requireContext())
-            .inflate(R.layout.main_layout, container, false)
-        return view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupUI()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val searchButton = view.findViewById<Button>(R.id.anime_search_button)
-        val searchEditText = view.findViewById<EditText>(R.id.anime_search_edit)
-        recyclerView = view.findViewById(R.id.main_recycler_view)
-
-        searchAnime("")
-        searchButton.setOnClickListener {
-            searchAnime(searchEditText.text.toString())
-        }
-    }
-
-    private fun searchAnime(name: String){
+    private fun setupUI() {
+        title = "Akira TV"
+        headersState = HEADERS_DISABLED
+        val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
+        val fetchTasks = listOf(
+            { AllAnimeParser().searchAnime("") },
+            { AllAnimeParser().queryPopular() },
+            { AllAnimeParser().randomRecommendations() }
+        )
         CoroutineScope(Dispatchers.IO).launch {
-            val anime = AllAnimeParser().searchAnime(name)
-            withContext(Dispatchers.Main) {
-                recyclerView.adapter = AnimeAdapter(anime)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+            fetchTasks.forEach { fetchTask ->
+                val list = fetchTask()
+                withContext(Dispatchers.Main) {
+                    rowsAdapter.add(ListRow(ArrayObjectAdapter(AnimePresenter()).apply {
+                        addAll(0, list)
+                    }))
+                }
             }
+            withContext(Dispatchers.Main) { adapter = rowsAdapter }
+        }
+        onItemViewClickedListener = MainClickListener()
+    }
+
+    inner class MainClickListener : OnItemViewClickedListener {
+        override fun onItemClicked(
+            itemViewHolder: Presenter.ViewHolder?,
+            item: Any,
+            rowViewHolder: RowPresenter.ViewHolder?,
+            row: Row
+        ) {
+            allAnimeID = (item as Anime).id
+            startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
         }
     }
 
     companion object {
-        var allAnimeID: String = ""
-        var episodeUrl: String = ""
+        var allAnimeID = ""
+        var episodeUrl = ""
     }
 }

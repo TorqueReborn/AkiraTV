@@ -1,4 +1,5 @@
 <resources>
-
-    <style name="Theme.AkiraTV" parent="@style/Theme.Leanback" />
+    <style name="Theme.AkiraTV" parent="@style/Theme.Leanback">
+        <item name="android:windowBackground">#1F1F1F</item>
+    </style>
 </resources>

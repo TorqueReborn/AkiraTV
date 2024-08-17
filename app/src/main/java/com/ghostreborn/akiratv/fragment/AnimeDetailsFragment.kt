@@ -23,7 +23,6 @@ class AnimeDetailsFragment : Fragment() {
 
     private lateinit var animeThumbnail: ImageView
     private lateinit var animeBanner: ImageView
-    lateinit var animeId: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,14 +32,13 @@ class AnimeDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.details_layout, container, false)
         animeThumbnail = view.findViewById(R.id.anime_thumbnail)
         animeBanner = view.findViewById(R.id.anime_banner)
-        animeId = arguments?.getString("anime_id") ?: ""
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val animeDetails = AllAnimeParser().animeDetails(animeId)
+            val animeDetails = AllAnimeParser().animeDetails(MainFragment.allAnimeID)
             withContext(Dispatchers.Main) {
                 view.findViewById<TextView>(R.id.anime_name).text = animeDetails.name
                 Glide.with(requireContext())
@@ -56,7 +54,7 @@ class AnimeDetailsFragment : Fragment() {
                     view.findViewById<Button>(R.id.prequel_button).apply {
                         visibility = View.VISIBLE
                         setOnClickListener {
-                            animeId = animeDetails.prequel
+                            MainFragment.allAnimeID = animeDetails.prequel
                             startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
                         }
                     }
@@ -66,7 +64,7 @@ class AnimeDetailsFragment : Fragment() {
                     view.findViewById<Button>(R.id.sequel_button).apply {
                         visibility = View.VISIBLE
                         setOnClickListener {
-                            animeId = animeDetails.sequel
+                            MainFragment.allAnimeID = animeDetails.sequel
                             startActivity(Intent(requireContext(), AnimeDetailsActivity::class.java))
                         }
                     }

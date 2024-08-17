@@ -12,7 +12,6 @@ import androidx.leanback.widget.Presenter
 import androidx.leanback.widget.Row
 import androidx.leanback.widget.RowPresenter
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
-import com.ghostreborn.akiratv.fragment.MainFragment.Companion.allAnimeID
 import com.ghostreborn.akiratv.presenter.EpisodePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +23,7 @@ class EpisodesFragment : BrowseSupportFragment() {
         super.onCreate(savedInstanceState)
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         CoroutineScope(Dispatchers.IO).launch {
-            val list = AllAnimeParser().episodes(allAnimeID)
+            val list = AllAnimeParser().episodes(MainFragment.allAnimeID)
 
             Log.e("TAG", list.toString())
 

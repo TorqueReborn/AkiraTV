@@ -10,14 +10,8 @@ class AnimeDetailsActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime_details)
 
-        val animeId = intent.getStringExtra("anime_id")
-        val fragment = AnimeDetailsFragment()
-        val bundle = Bundle()
-        bundle.putString("anime_id", animeId)
-        fragment.arguments = bundle
-
         supportFragmentManager.beginTransaction()
-            .replace(R.id.details_frame_layout, fragment)
+            .replace(R.id.details_frame_layout, AnimeDetailsFragment())
             .commitNow()
 
     }
