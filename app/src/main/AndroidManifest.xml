@@ -19,6 +19,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AkiraTV">
+
         <activity
             android:name=".ui.PlayActivity"
             android:exported="false" />
