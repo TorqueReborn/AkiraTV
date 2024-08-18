@@ -2,7 +2,7 @@ package com.ghostreborn.akiratv
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.ghostreborn.akiratv.fragment.MainFragment
+import com.ghostreborn.akiratv.fragment.SearchFragment
 
 class MainActivity : FragmentActivity() {
 
@@ -10,7 +10,7 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_browse_fragment, MainFragment())
+            .replace(R.id.main_browse_fragment, SearchFragment())
             .commitNow()
     }
 }

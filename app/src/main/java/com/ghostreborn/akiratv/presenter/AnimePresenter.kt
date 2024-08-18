@@ -1,5 +1,6 @@
 package com.ghostreborn.akiratv.presenter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -7,7 +8,9 @@ import android.widget.TextView
 import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
 import com.ghostreborn.akiratv.R
+import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.model.Anime
+import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 
 class AnimePresenter : Presenter() {
 
@@ -27,6 +30,15 @@ class AnimePresenter : Presenter() {
                 Glide.with(viewHolder.view.context)
                     .load(item.thumbnail)
                     .into(thumbnail)
+                viewHolder.view.setOnClickListener {
+                    MainFragment.allAnimeID = item.id
+                    viewHolder.view.context.startActivity(
+                        Intent(
+                            viewHolder.view.context,
+                            AnimeDetailsActivity::class.java
+                        )
+                    )
+                }
             }
         }
     }
