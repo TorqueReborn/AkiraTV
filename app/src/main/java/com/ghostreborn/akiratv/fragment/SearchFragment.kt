@@ -1,6 +1,5 @@
 package com.ghostreborn.akiratv.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.leanback.app.SearchSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
@@ -8,15 +7,8 @@ import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.ObjectAdapter
-import androidx.leanback.widget.OnItemViewClickedListener
-import androidx.leanback.widget.Presenter
-import androidx.leanback.widget.Row
-import androidx.leanback.widget.RowPresenter
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
-import com.ghostreborn.akiratv.fragment.MainFragment.Companion.allAnimeID
-import com.ghostreborn.akiratv.model.Anime
 import com.ghostreborn.akiratv.presenter.AnimePresenter
-import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +21,7 @@ class SearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchResu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSearchResultProvider(this)
+        performSearch("")
     }
 
     override fun getResultsAdapter(): ObjectAdapter {
