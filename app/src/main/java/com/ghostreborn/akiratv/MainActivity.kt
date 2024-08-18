@@ -6,6 +6,9 @@ import com.ghostreborn.akiratv.fragment.SearchFragment
 
 class MainActivity : FragmentActivity() {
 
+    // TODO https://api.github.com/repos/TorqueReborn/AkiraTV/releases/latest
+    //  shows new releases. Scrape when available new update
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
