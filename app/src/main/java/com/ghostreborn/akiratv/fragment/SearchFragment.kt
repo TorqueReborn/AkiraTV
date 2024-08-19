@@ -8,7 +8,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.leanback.app.SearchSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
-import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
 import androidx.leanback.widget.ObjectAdapter
@@ -47,12 +46,18 @@ class SearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchResu
     private fun performSearch(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             rowsAdapter.clear()
-            val searchResults = AllAnimeParser().searchAnime(query)
-            withContext(Dispatchers.Main) {
-                val headerItem = HeaderItem("Search Results")
-                val listRowAdapter = ArrayObjectAdapter(AnimePresenter())
-                listRowAdapter.addAll(0, searchResults)
-                rowsAdapter.add(ListRow(headerItem, listRowAdapter))
+            val fetchTasks = listOf(
+                { AllAnimeParser().searchAnime(query) },
+                { AllAnimeParser().queryPopular() },
+                { AllAnimeParser().randomRecommendations() }
+            )
+            fetchTasks.forEach { fetchTask ->
+                val list = fetchTask()
+                withContext(Dispatchers.Main) {
+                    rowsAdapter.add(ListRow(ArrayObjectAdapter(AnimePresenter()).apply {
+                        addAll(0, list)
+                    }))
+                }
             }
         }
     }
