@@ -21,6 +21,9 @@ import kotlinx.coroutines.withContext
 class EpisodesFragment : BrowseSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        headersState = HEADERS_DISABLED
+
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         CoroutineScope(Dispatchers.IO).launch {
             val list = AllAnimeParser().episodes(MainFragment.allAnimeID)
@@ -33,8 +36,7 @@ class EpisodesFragment : BrowseSupportFragment() {
                     for (j in 0 until list[i].size) {
                         listRowAdapter.add(list[i][j])
                     }
-                    val header = HeaderItem(i.toLong(), "Page ${i + 1}")
-                    rowsAdapter.add(ListRow(header, listRowAdapter))
+                    rowsAdapter.add(ListRow(listRowAdapter))
                 }
                 adapter = rowsAdapter
                 onItemViewClickedListener = EpisodeClickListener()
