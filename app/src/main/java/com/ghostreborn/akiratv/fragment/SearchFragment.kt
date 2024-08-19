@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class SearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchResultProvider {
 
     private val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-    private val REQUEST_MICROPHONE_PERMISSION = 1025
+    private val microphonePermission = 1025
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +69,7 @@ class SearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchResu
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.RECORD_AUDIO),
-                REQUEST_MICROPHONE_PERMISSION
+                microphonePermission
             )
             Toast.makeText(
                 requireContext(),
