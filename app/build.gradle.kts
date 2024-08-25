@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -35,10 +35,9 @@ android {
 }
 
 dependencies {
-    implementation(libs.okhttp)
+    implementation(libs.coil)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.leanback)
-    implementation(libs.glide)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

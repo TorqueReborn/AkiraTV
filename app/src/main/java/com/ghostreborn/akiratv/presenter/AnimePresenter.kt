@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.leanback.widget.Presenter
-import com.bumptech.glide.Glide
+import coil.load
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.model.Anime
@@ -27,9 +27,7 @@ class AnimePresenter : Presenter() {
                 val title = viewHolder.view.findViewById<TextView>(R.id.card_title)
                 val thumbnail = viewHolder.view.findViewById<ImageView>(R.id.card_thumbnail)
                 title.text = item.name
-                Glide.with(viewHolder.view.context)
-                    .load(item.thumbnail)
-                    .into(thumbnail)
+                thumbnail.load(item.thumbnail)
                 viewHolder.view.setOnClickListener {
                     MainFragment.allAnimeID = item.id
                     viewHolder.view.context.startActivity(

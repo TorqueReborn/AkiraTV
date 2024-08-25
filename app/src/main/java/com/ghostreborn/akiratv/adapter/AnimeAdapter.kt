@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.model.Anime
@@ -33,7 +33,7 @@ class AnimeAdapter(private val animes: ArrayList<Anime>) :
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animes[position]
         holder.animeNameTextView.text = anime.name
-        Glide.with(holder.itemView.context).load(anime.thumbnail).into(holder.animeImageView)
+        holder.animeImageView.load(anime.thumbnail)
         holder.itemView.isFocusable = true
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AnimeDetailsActivity::class.java)

@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import coil.load
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.allAnime.AllAnimeParser
 import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
@@ -39,9 +39,7 @@ class AnimeDetailsFragment : Fragment() {
             val animeDetails = AllAnimeParser().animeDetails(MainFragment.allAnimeID)
             withContext(Dispatchers.Main) {
                 view.findViewById<TextView>(R.id.anime_name).text = animeDetails.name
-                Glide.with(requireContext())
-                    .load(animeDetails.thumbnail)
-                    .into(animeThumbnail)
+                animeThumbnail.load(animeDetails.thumbnail)
                 view.findViewById<CardView>(R.id.watch_button).setOnClickListener {
                     startActivity(Intent(requireContext(), EpisodesActivity::class.java))
                 }
