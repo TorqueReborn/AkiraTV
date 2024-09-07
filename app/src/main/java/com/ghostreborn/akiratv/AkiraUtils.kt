@@ -1,5 +1,7 @@
 package com.ghostreborn.akiratv
 
+import android.content.Context
+import androidx.fragment.app.FragmentActivity.MODE_PRIVATE
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
@@ -19,6 +21,20 @@ class AkiraUtils {
             }
         }
         return out
+    }
+
+    fun initialRun(context: Context) {
+        val setupComplete = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+            .getBoolean(Constants.PREF_SETUP_COMPLETE, false)
+
+        if (!setupComplete) {
+            val lastUpdateDate = AkiraUtils().releaseDate()
+            context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+                .edit()
+                .putString(Constants.PREF_LAST_DATE, lastUpdateDate)
+                .putBoolean(Constants.PREF_SETUP_COMPLETE, true)
+                .apply()
+        }
     }
 
     private fun releaseDate(): String {
