@@ -17,60 +17,26 @@ import java.util.TimeZone
 
 class AkiraUtils {
 
-    private fun connect(): StringBuilder {
-        val out = StringBuilder()
-        with(URL("https://api.github.com/repos/TorqueReborn/AkiraTV/releases/latest").openConnection() as HttpURLConnection) {
-            requestMethod = "GET"
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                inputStream.bufferedReader().use { out.append(it.readText()) }
-            }
-        }
-        return out
-    }
-
-    fun checkLatestPackage(context: Context) {
+    fun checkForUpdate(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
-            val setupComplete = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
-                .getBoolean(Constants.PREF_SETUP_COMPLETE, false)
-            if (!setupComplete) {
-
-                val lastUpdateDate = AkiraUtils().releaseDate()
-                context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
-                    .edit()
-                    .putString(Constants.PREF_LAST_DATE, lastUpdateDate)
-                    .putBoolean(Constants.PREF_SETUP_COMPLETE, true)
-                    .apply()
-            }
-            checkUpdate(context)
-        }
-    }
-
-    private fun releaseDate(): String {
-        val rawJSON = connect()
-        return JSONObject(rawJSON.toString()).getJSONArray("assets")
-            .getJSONObject(0)
-            .getString("updated_at")
-    }
-
-    private fun checkTimeIsGreaterThan(currentTime: String): Boolean {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val parsedCurrentTime = dateFormat.parse(currentTime) as Date
-        val parsedNewTime = dateFormat.parse(releaseDate()) as Date
-        return parsedNewTime.after(parsedCurrentTime)
-    }
-
-    private fun checkUpdate(context: Context) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val lastUpdateDate = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
-                .getString(Constants.PREF_LAST_DATE, "") as String
-            val timeGreater = checkTimeIsGreaterThan(lastUpdateDate)
-            withContext(Dispatchers.Main) {
-                if (timeGreater) {
-                    Toast.makeText(context, "Update Available", Toast.LENGTH_SHORT).show()
+            val sp = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).apply { timeZone = TimeZone.getTimeZone("UTC") }
+            val lastUpdate = if (!sp.getBoolean(Constants.PREF_SETUP_COMPLETE, false)) {
+                val conn = URL("https://api.github.com/repos/TorqueReborn/AkiraTV/releases/latest").openConnection() as HttpURLConnection
+                conn.requestMethod = "GET"
+                val response = if (conn.responseCode == HttpURLConnection.HTTP_OK) conn.inputStream.bufferedReader().use { it.readText() } else ""
+                JSONObject(response).getJSONArray("assets").getJSONObject(0).getString("updated_at").also {
+                    sp.edit().putString(Constants.PREF_LAST_DATE, it).putBoolean(Constants.PREF_SETUP_COMPLETE, true).apply()
                 }
+            } else sp.getString(Constants.PREF_LAST_DATE, "") ?: ""
+
+            val conn = URL("https://api.github.com/repos/TorqueReborn/AkiraTV/releases/latest").openConnection() as HttpURLConnection
+            conn.requestMethod = "GET"
+            val newTime = sdf.parse(JSONObject(conn.inputStream.bufferedReader().use { it.readText() })
+                .getJSONArray("assets").getJSONObject(0).getString("updated_at")) as Date
+            if (newTime.after(sdf.parse(lastUpdate) as Date)) withContext(Dispatchers.Main) {
+                Toast.makeText(context, "Update Available", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 }
