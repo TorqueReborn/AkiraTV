@@ -1,7 +1,12 @@
 package com.ghostreborn.akiratv
 
 import android.content.Context
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity.MODE_PRIVATE
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
@@ -23,17 +28,20 @@ class AkiraUtils {
         return out
     }
 
-    fun initialRun(context: Context) {
-        val setupComplete = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
-            .getBoolean(Constants.PREF_SETUP_COMPLETE, false)
+    fun checkLatestPackage(context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val setupComplete = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+                .getBoolean(Constants.PREF_SETUP_COMPLETE, false)
+            if (!setupComplete) {
 
-        if (!setupComplete) {
-            val lastUpdateDate = AkiraUtils().releaseDate()
-            context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
-                .edit()
-                .putString(Constants.PREF_LAST_DATE, lastUpdateDate)
-                .putBoolean(Constants.PREF_SETUP_COMPLETE, true)
-                .apply()
+                val lastUpdateDate = AkiraUtils().releaseDate()
+                context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+                    .edit()
+                    .putString(Constants.PREF_LAST_DATE, lastUpdateDate)
+                    .putBoolean(Constants.PREF_SETUP_COMPLETE, true)
+                    .apply()
+            }
+            checkUpdate(context)
         }
     }
 
@@ -44,12 +52,25 @@ class AkiraUtils {
             .getString("updated_at")
     }
 
-    fun checkTimeIsGreaterThan(currentTime: String): Boolean {
+    private fun checkTimeIsGreaterThan(currentTime: String): Boolean {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val parsedCurrentTime = dateFormat.parse(currentTime) as Date
         val parsedNewTime = dateFormat.parse(releaseDate()) as Date
         return parsedNewTime.after(parsedCurrentTime)
+    }
+
+    private fun checkUpdate(context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val lastUpdateDate = context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+                .getString(Constants.PREF_LAST_DATE, "") as String
+            val timeGreater = checkTimeIsGreaterThan(lastUpdateDate)
+            withContext(Dispatchers.Main) {
+                if (timeGreater) {
+                    Toast.makeText(context, "Update Available", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 }
