@@ -1,5 +1,15 @@
 <resources>
     <style name="Theme.AkiraTV" parent="@style/Theme.Leanback">
         <item name="android:windowBackground">#1F1F1F</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+    <style name="AkiraEditText" parent="Theme.AkiraTV">
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="layout_constraintWidth_percent">0.6</item>
+    </style>
+    <style name="AkiraButton" parent="Theme.AkiraTV">
+        <item name="android:background">@drawable/rounded_background</item>
     </style>
 </resources>
