@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.coil)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.leanback)
