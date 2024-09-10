@@ -6,4 +6,6 @@
     <string name="kitsu_image">Kitsu Image</string>
     <string name="login">Login</string>
     <string name="signup">SignUp</string>
+    <string name="continue_login">Continue</string>
+    <string name="login_info">AkiraTV requires authentication with Kitsu</string>
 </resources>

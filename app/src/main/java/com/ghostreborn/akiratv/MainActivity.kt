@@ -2,6 +2,7 @@ package com.ghostreborn.akiratv
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.ghostreborn.akiratv.fragment.LoginFragment
 
 class MainActivity : FragmentActivity() {
 

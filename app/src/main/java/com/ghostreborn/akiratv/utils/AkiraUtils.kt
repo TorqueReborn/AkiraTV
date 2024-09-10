@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.utils
 
 import android.content.Context
 import android.content.Intent
