@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -36,6 +38,8 @@ android {
 dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.coil)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.leanback)

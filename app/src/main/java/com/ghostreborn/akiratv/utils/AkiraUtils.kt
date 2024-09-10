@@ -1,9 +1,13 @@
 package com.ghostreborn.akiratv.utils
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.room.Room
+import com.ghostreborn.akiratv.Constants
+import com.ghostreborn.akiratv.database.SavedEntryDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,5 +26,17 @@ class AkiraUtils {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(updateURL)))
             }
         }
+    }
+
+    fun checkLogin(context: Context): Boolean {
+        return context.getSharedPreferences(Constants.SHARED_PREF, MODE_PRIVATE)
+            .getBoolean(Constants.PREF_LOGGED_IN, false)
+    }
+
+    fun getDB(context: Context): SavedEntryDatabase {
+        return Room.databaseBuilder(
+            context,
+            SavedEntryDatabase::class.java, "my-database"
+        ).build()
     }
 }
