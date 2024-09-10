@@ -12,4 +12,12 @@
     <style name="AkiraButton" parent="Theme.AkiraTV">
         <item name="android:background">@drawable/rounded_background</item>
     </style>
+    <style name="AkiraText" parent="Theme.AkiraTV">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="AkiraConstraint" parent="Theme.AkiraTV">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintWidth_percent">0.5</item>
+    </style>
 </resources>

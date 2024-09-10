@@ -9,15 +9,55 @@
     tools:ignore="MergeRootFrame">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/login_constraint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/login_progress"
+        style="@style/AkiraConstraint"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/login_progress_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/kitsu_image"
+            android:src="@drawable/kitsu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/login_progress_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_progress_logo" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/login_constraint"
+        style="@style/AkiraConstraint"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/login_logo"
@@ -65,14 +105,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/login_info_constraint"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/AkiraConstraint"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/login_info_logo"
@@ -97,10 +135,10 @@
 
         <TextView
             android:id="@+id/login_info_desc"
+            style="@style/AkiraText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_info"
-            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/login_info_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
