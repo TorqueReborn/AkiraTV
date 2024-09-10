@@ -1,4 +1,5 @@
 <resources>
     <color name="default_background">#2C2C2C</color>
     <color name="focused_background">#3C3C3C</color>
+    <color name="card_background">#1A1A1A</color>
 </resources>

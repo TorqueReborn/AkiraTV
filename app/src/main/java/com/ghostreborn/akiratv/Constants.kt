@@ -11,6 +11,7 @@ object Constants {
     val PREF_TOKEN = "TOKEN"
     val PREF_REFRESH_TOKEN = "REFRESH_TOKEN"
     val PREF_LOGGED_IN = "LOGGED_IN"
+
     val api = Retrofit.Builder()
         .baseUrl("https://kitsu.io/api/")
         .addConverterFactory(GsonConverterFactory.create())

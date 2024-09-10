@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="arrow_icon_size">50dp</dimen>
+    <dimen name="big_padding">16dp</dimen>
+    <dimen name="card_image_size">80dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="card_sub">11sp</dimen>
+    <dimen name="card_head">16sp</dimen>
+</resources>

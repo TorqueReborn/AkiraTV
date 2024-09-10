@@ -8,4 +8,8 @@
     <string name="signup">SignUp</string>
     <string name="continue_login">Continue</string>
     <string name="login_info">AkiraTV requires authentication with Kitsu</string>
+    <string name="anime_image">Anime Image</string>
+    <string name="unwatched">Not yet watched</string>
+    <string name="anime_thumbnail">Anime Thumbnail</string>
+    <string name="anime_title">Anime Title</string>
 </resources>
