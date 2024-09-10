@@ -5,4 +5,5 @@
     <string name="enter_password">Enter password</string>
     <string name="kitsu_image">Kitsu Image</string>
     <string name="login">Login</string>
+    <string name="signup">SignUp</string>
 </resources>
