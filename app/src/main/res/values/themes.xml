@@ -1,6 +1,6 @@
 <resources>
     <style name="Theme.AkiraTV" parent="@style/Theme.Leanback">
-        <item name="android:windowBackground">#1F1F1F</item>
+        <item name="android:windowBackground">#141414</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
     <style name="AkiraEditText" parent="Theme.AkiraTV">
