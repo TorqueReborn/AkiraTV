@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.presenter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.leanback.widget.Presenter
 import coil.load
+import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.models.Anime
 
 class AnimePresenter : Presenter() {

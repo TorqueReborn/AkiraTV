@@ -5,8 +5,11 @@ import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
-import com.ghostreborn.akiratv.AnimePresenter
+import androidx.leanback.widget.Presenter
+import androidx.leanback.widget.PresenterSelector
+import com.ghostreborn.akiratv.presenter.AnimePresenter
 import com.ghostreborn.akiratv.models.Anime
+import com.ghostreborn.akiratv.presenter.AkiraHeaderPresenter
 import com.ghostreborn.akiratv.utils.AkiraUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,9 +24,15 @@ class HomeFragment : BrowseSupportFragment() {
     }
 
     private fun setupUI() {
-        title = "Akira TV"
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
-        headersState = HEADERS_DISABLED
+
+        setHeaderPresenterSelector(object: PresenterSelector() {
+            override fun getPresenter(item: Any?): Presenter {
+                return AkiraHeaderPresenter("One Piece")
+            }
+        })
+
+        headersState = HEADERS_ENABLED
         CoroutineScope(Dispatchers.IO).launch {
             val db = AkiraUtils().getDB(requireContext())
             val saved = db.savedEntryDao().getCurrent()
