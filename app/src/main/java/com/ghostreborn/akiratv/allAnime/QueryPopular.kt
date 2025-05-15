@@ -17,8 +17,7 @@ class QueryPopular {
         connection.setRequestProperty("Referer", "https://allmanga.to")
         return connection.inputStream.bufferedReader().use { it.readText() }
     }
-
-
+    
     fun queryPopular(): List<String> {
         val rawJSON = query()
         val ids = ArrayList<String>()

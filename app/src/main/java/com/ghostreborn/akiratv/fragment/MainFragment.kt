@@ -5,7 +5,8 @@ import androidx.leanback.app.BrowseSupportFragment
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.ListRow
 import androidx.leanback.widget.ListRowPresenter
-import com.ghostreborn.akiratv.allAnime.AllAnimeParser
+import com.ghostreborn.akiratv.allAnime.DetailByIds
+import com.ghostreborn.akiratv.allAnime.QueryPopular
 import com.ghostreborn.akiratv.presenter.AnimePresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,9 +25,7 @@ class MainFragment : BrowseSupportFragment() {
         headersState = HEADERS_DISABLED
         val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
         val fetchTasks = listOf(
-            { AllAnimeParser().searchAnime("") },
-            { AllAnimeParser().queryPopular() },
-            { AllAnimeParser().randomRecommendations() }
+            { DetailByIds().details(QueryPopular().queryPopular()) }
         )
         CoroutineScope(Dispatchers.IO).launch {
             fetchTasks.forEach { fetchTask ->

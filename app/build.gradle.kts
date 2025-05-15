@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.glide)
     implementation(libs.coil)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.leanback)
