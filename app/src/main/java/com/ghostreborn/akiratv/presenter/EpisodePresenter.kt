@@ -13,7 +13,7 @@ class EpisodePresenter : Presenter() {
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, item: Any) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, item: Any?) {
         when (item) {
             is String -> {
                 viewHolder.view.isFocusable = true
