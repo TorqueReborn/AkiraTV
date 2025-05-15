@@ -6,14 +6,22 @@
 
     <ImageView
         android:id="@+id/home_banner"
-        android:layout_width="300dp"
+        android:layout_width="500dp"
         android:layout_height="0dp"
         android:contentDescription="@string/anime_banner"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/home_recycler"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/default_background" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler"
