@@ -1,6 +1,9 @@
 package com.ghostreborn.akiratv.fragment
 
+import android.app.DownloadManager
+import android.content.Context
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.core.net.toUri
 
 class TestFragment: Fragment() {
 
@@ -29,6 +33,15 @@ class TestFragment: Fragment() {
             val test = GithubAPI().latestPackage()
             withContext(Dispatchers.Main) {
                 testText.text = test
+                val downloadManager = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                val uri = test.toUri()
+                val request = DownloadManager.Request(uri).apply {
+                    setTitle("AkiraTV.apk")
+                    setDescription("Downloading apk...")
+                    setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "AkiraTV.apk")
+                }
+                downloadManager.enqueue(request)
             }
         }
     }
