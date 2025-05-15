@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.adapter.AnimeAdapter
 import com.ghostreborn.akiratv.allAnime.DetailByIds
 import com.ghostreborn.akiratv.allAnime.QueryPopular
+import com.ghostreborn.akiratv.model.Anime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +27,7 @@ class HomeFragment: Fragment() {
     private lateinit var homeRecycler: RecyclerView
     private lateinit var animeAdapter: AnimeAdapter
     private lateinit var homeBanner: ImageView
+    private lateinit var homeTitle: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +42,12 @@ class HomeFragment: Fragment() {
 
         homeRecycler = view.findViewById(R.id.home_recycler)
         homeBanner = view.findViewById(R.id.home_banner)
+        homeTitle = view.findViewById(R.id.home_title)
 
         CoroutineScope(Dispatchers.IO).launch {
             val anime = DetailByIds().details(QueryPopular().queryPopular())
             withContext(Dispatchers.Main) {
-                animeAdapter = AnimeAdapter(anime, homeBanner)
+                animeAdapter = AnimeAdapter(anime, homeBanner, homeTitle)
                 homeRecycler.adapter = animeAdapter
                 homeRecycler.layoutManager = GridLayoutManager(requireContext(), 1,LinearLayoutManager.HORIZONTAL, false)
             }
@@ -51,9 +55,10 @@ class HomeFragment: Fragment() {
     }
 
     companion object {
-        fun changeImage(context: Context, url: String, imageView: ImageView) {
+        fun updateUI(context: Context, anime: Anime, imageView: ImageView, homeTitle: TextView) {
+            homeTitle.text = anime.name
             Glide.with(context)
-                .load(url)
+                .load(anime.thumbnail)
                 .into(imageView)
         }
     }

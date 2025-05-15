@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ghostreborn.akiratv.R
@@ -13,7 +14,7 @@ import com.ghostreborn.akiratv.fragment.MainFragment
 import com.ghostreborn.akiratv.model.Anime
 import com.ghostreborn.akiratv.ui.AnimeDetailsActivity
 
-class AnimeAdapter(private val animes: ArrayList<Anime>, private val homeBanner: ImageView) :
+class AnimeAdapter(private val animes: ArrayList<Anime>, private val homeBanner: ImageView, private val homeTitle: TextView) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,7 +43,7 @@ class AnimeAdapter(private val animes: ArrayList<Anime>, private val homeBanner:
         holder.itemView.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 holder.itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start()
-                HomeFragment.changeImage(holder.itemView.context, anime.thumbnail, homeBanner)
+                HomeFragment.updateUI(holder.itemView.context, anime, homeBanner, homeTitle)
             } else {
                 holder.itemView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
             }
