@@ -44,7 +44,7 @@ class HomeFragment: Fragment() {
             withContext(Dispatchers.Main) {
                 animeAdapter = AnimeAdapter(anime, homeBanner)
                 homeRecycler.adapter = animeAdapter
-                homeRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
+                homeRecycler.layoutManager = GridLayoutManager(requireContext(), 3)
             }
         }
     }

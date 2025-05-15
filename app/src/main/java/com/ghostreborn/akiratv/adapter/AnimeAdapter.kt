@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ghostreborn.akiratv.R
@@ -19,7 +18,6 @@ class AnimeAdapter(private val animes: ArrayList<Anime>, private val homeBanner:
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val animeImageView: ImageView = itemView.findViewById(R.id.card_thumbnail)
-        val animeNameTextView: TextView = itemView.findViewById(R.id.card_title)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimeViewHolder {
@@ -33,7 +31,6 @@ class AnimeAdapter(private val animes: ArrayList<Anime>, private val homeBanner:
 
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animes[position]
-        holder.animeNameTextView.text = anime.name
         holder.animeImageView.load(anime.thumbnail)
         holder.itemView.isFocusable = true
         holder.itemView.setOnClickListener {
