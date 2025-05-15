@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ghostreborn.akiratv.R
@@ -44,7 +45,7 @@ class HomeFragment: Fragment() {
             withContext(Dispatchers.Main) {
                 animeAdapter = AnimeAdapter(anime, homeBanner)
                 homeRecycler.adapter = animeAdapter
-                homeRecycler.layoutManager = GridLayoutManager(requireContext(), 3)
+                homeRecycler.layoutManager = GridLayoutManager(requireContext(), 1,LinearLayoutManager.HORIZONTAL, false)
             }
         }
     }
