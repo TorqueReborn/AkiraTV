@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.ghostreborn.akiratv.R
-import com.ghostreborn.akiratv.allAnime.DetailByIds
+import com.ghostreborn.akiratv.update.GithubAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,9 +26,9 @@ class TestFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val testText: TextView = view.findViewById(R.id.test_text)
         CoroutineScope(Dispatchers.IO).launch {
-            val test = DetailByIds().details(mutableListOf("ReooPAxPMsHM4KPMY"))
+            val test = GithubAPI().latestPackage()
             withContext(Dispatchers.Main) {
-                testText.text = test.toString()
+                testText.text = test
             }
         }
     }
