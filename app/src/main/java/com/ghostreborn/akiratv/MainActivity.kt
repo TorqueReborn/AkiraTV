@@ -14,7 +14,7 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_main)
 
         val image = findViewById<ImageView>(R.id.test_image)
-        image.load("https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250")
+        image.load("https://s4.anilist.co/file/anilistcdn/media/anime/banner/21-wf37VakJmZqs.jpg")
         val recycler = findViewById<RecyclerView>(R.id.main_recycler)
         val animes = ArrayList<Anime>()
         animes.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
@@ -45,7 +45,7 @@ class MainActivity : FragmentActivity() {
         animes.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
         animes.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
         val adapter = AnimeAdapter(animes)
-        recycler.layoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.HORIZONTAL, false)
         recycler.adapter = adapter
     }
 }
