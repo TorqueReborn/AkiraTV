@@ -8,7 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/window_color"
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -16,8 +18,10 @@
 
             <ImageView
                 android:id="@+id/anime_image"
-                android:layout_width="250dp"
-                android:layout_height="375dp"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/anime_image"
+                android:scaleType="centerCrop"
                 android:src="@color/brand_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="@+id/anime_image"
                 app:layout_constraintStart_toStartOf="@+id/anime_image"
                 app:layout_constraintTop_toBottomOf="@+id/anime_image" />

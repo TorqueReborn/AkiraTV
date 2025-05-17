@@ -32,6 +32,9 @@ class MainFragment: BrowseSupportFragment() {
 
         val listRowAdapter = ArrayObjectAdapter(cardPresenter)
         listRowAdapter.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
+        listRowAdapter.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
+        listRowAdapter.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
+        listRowAdapter.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
 
         val header = HeaderItem(0, "Anime")
         rowsAdapter.add(ListRow(header, listRowAdapter))

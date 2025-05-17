@@ -1,3 +1,4 @@
 <resources>
-    <color name="brand_color">#43B694</color>
+    <color name="brand_color">#2B2F2C</color>
+    <color name="window_color">#1F1F1F</color>
 </resources>
