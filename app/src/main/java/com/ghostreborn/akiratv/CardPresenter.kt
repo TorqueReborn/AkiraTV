@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv.presenter
+package com.ghostreborn.akiratv
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.leanback.widget.Presenter
 import coil.load
-import com.ghostreborn.akiratv.R
-import com.ghostreborn.akiratv.model.Anime
 
-class CardPresenter: Presenter() {
+class CardPresenter : Presenter() {
 
     private lateinit var mContext: Context
 

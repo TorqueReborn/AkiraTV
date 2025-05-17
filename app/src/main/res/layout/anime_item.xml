@@ -18,7 +18,7 @@
             android:layout_height="@dimen/card_height"
             android:contentDescription="@string/anime_image"
             android:scaleType="centerCrop"
-            android:src="@color/brand_color" />
+            android:src="@mipmap/ic_banner" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
