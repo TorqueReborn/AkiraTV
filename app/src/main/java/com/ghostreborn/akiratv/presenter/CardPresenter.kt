@@ -28,9 +28,7 @@ class CardPresenter: Presenter() {
     ) {
         val anime = item as Anime
         val animeImage = viewHolder.view.findViewById<ImageView>(R.id.anime_image)
-        val animeName = viewHolder.view.findViewById<TextView>(R.id.anime_name)
         animeImage.load(anime.thumbnail)
-        animeName.text = anime.title
     }
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
