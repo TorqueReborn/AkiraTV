@@ -86,4 +86,13 @@
         app:layout_constraintStart_toStartOf="@+id/margin_guideline_vertical"
         app:layout_constraintTop_toTopOf="@+id/margin_guideline_horizontal" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/anime_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_guideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
