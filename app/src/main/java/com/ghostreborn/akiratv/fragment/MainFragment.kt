@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.fragment
 
 import android.os.Bundle
 import androidx.leanback.app.BrowseSupportFragment
