@@ -16,6 +16,8 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : FragmentActivity() {
 
+    private lateinit var animeBanner: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,7 +30,7 @@ class MainActivity : FragmentActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val animes = QueryPopular().queryPopular()
             withContext(Dispatchers.Main) {
-                val adapter = AnimeAdapter(animes)
+                val adapter = AnimeAdapter(animes, animeBanner)
                 recycler.layoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.HORIZONTAL, false)
                 recycler.adapter = adapter
             }
@@ -37,8 +39,7 @@ class MainActivity : FragmentActivity() {
     }
 
     companion object {
-        lateinit var animeBanner: ImageView
-        fun changeDesc(anime: Anime) {
+        fun changeDesc(anime: Anime, animeBanner: ImageView) {
             animeBanner.load(anime.thumbnail)
         }
     }

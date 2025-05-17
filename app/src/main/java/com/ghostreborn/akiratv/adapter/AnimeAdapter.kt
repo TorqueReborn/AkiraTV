@@ -10,7 +10,7 @@ import com.ghostreborn.akiratv.MainActivity
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
 
-class AnimeAdapter(private val animeList: List<Anime>) :
+class AnimeAdapter(private val animeList: List<Anime>, private val animeBanner: ImageView) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +41,7 @@ class AnimeAdapter(private val animeList: List<Anime>) :
         holder.animeImage.load(anime.thumbnail)
         holder.itemView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                MainActivity.changeDesc(anime)
+                MainActivity.changeDesc(anime, animeBanner)
             }
         }
     }
