@@ -20,7 +20,7 @@ class AnimeAdapter(private val animeList: List<Anime>) :
 
             itemView.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
-                    v.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start()
+                    v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
                 } else {
                     v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
                 }
