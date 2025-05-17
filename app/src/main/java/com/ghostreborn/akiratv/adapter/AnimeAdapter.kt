@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.ghostreborn.akiratv.MainActivity
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
 
@@ -14,6 +15,7 @@ class AnimeAdapter(private val animeList: List<Anime>) :
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val animeImage: ImageView = itemView.findViewById(R.id.anime_image)
+
         init {
             itemView.isFocusable = true
             itemView.isFocusableInTouchMode = true
@@ -37,6 +39,11 @@ class AnimeAdapter(private val animeList: List<Anime>) :
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animeList[position]
         holder.animeImage.load(anime.thumbnail)
+        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                MainActivity.changeDesc(anime)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
