@@ -8,4 +8,9 @@ class MainFragment : BrowseSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+    private fun updateBackground() {
+
+    }
+
 }
