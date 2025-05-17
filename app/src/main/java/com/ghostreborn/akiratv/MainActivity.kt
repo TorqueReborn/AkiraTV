@@ -11,7 +11,7 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val image = findViewById<ImageView>(R.id.test_image)
+        val image = findViewById<ImageView>(R.id.anime_banner)
         image.load("https://s4.anilist.co/file/anilistcdn/media/anime/banner/21-wf37VakJmZqs.jpg")
     }
 }

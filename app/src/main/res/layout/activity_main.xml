@@ -6,6 +6,27 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/text_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontal_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +41,7 @@
         app:layout_constraintGuide_percent="0.35"/>
 
     <ImageView
-        android:id="@+id/test_image"
+        android:id="@+id/anime_banner"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/anime_image"
@@ -32,7 +53,7 @@
         tools:src="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/banner_gradient_vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/gradient_background"
@@ -43,14 +64,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/banner_gradient_horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/gradient_background"
         android:src="@drawable/gradient_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
-        app:layout_constraintEnd_toEndOf="@+id/test_image"
-        app:layout_constraintStart_toStartOf="@+id/test_image"
+        app:layout_constraintEnd_toEndOf="@+id/anime_banner"
+        app:layout_constraintStart_toStartOf="@+id/anime_banner"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/anime_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="One Piece"
+        android:textAllCaps="true"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/text_guideline"
+        app:layout_constraintStart_toStartOf="@+id/margin_guideline_vertical"
+        app:layout_constraintTop_toTopOf="@+id/margin_guideline_horizontal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
