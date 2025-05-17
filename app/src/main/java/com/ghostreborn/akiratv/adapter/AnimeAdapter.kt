@@ -4,13 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ghostreborn.akiratv.MainActivity
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
 
-class AnimeAdapter(private val animeList: List<Anime>, private val animeBanner: ImageView) :
+class AnimeAdapter(
+    private val animeList: List<Anime>,
+    private val animeName: TextView,
+    private val animeBanner: ImageView
+) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
 
     class AnimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -19,14 +24,6 @@ class AnimeAdapter(private val animeList: List<Anime>, private val animeBanner: 
         init {
             itemView.isFocusable = true
             itemView.isFocusableInTouchMode = true
-
-            itemView.setOnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
-                } else {
-                    v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
-                }
-            }
         }
     }
 
@@ -41,7 +38,10 @@ class AnimeAdapter(private val animeList: List<Anime>, private val animeBanner: 
         holder.animeImage.load(anime.thumbnail)
         holder.itemView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                MainActivity.changeDesc(anime, animeBanner)
+                MainActivity.changeDesc(anime, animeName, animeBanner)
+                v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
+            } else {
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
             }
         }
     }
