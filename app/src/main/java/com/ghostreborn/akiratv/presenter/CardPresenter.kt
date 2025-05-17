@@ -1,9 +1,13 @@
 package com.ghostreborn.akiratv.presenter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.leanback.widget.ImageCardView
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.leanback.widget.Presenter
+import coil.load
+import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
 
 class CardPresenter: Presenter() {
@@ -12,11 +16,10 @@ class CardPresenter: Presenter() {
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         mContext = parent.context
-        val cardView = ImageCardView(mContext)
-        cardView.isFocusable = true
-        cardView.isFocusableInTouchMode = true
-        cardView.setMainImageDimensions(150, 200)
-        return ViewHolder(cardView)
+        val animeItem = LayoutInflater.from(mContext).inflate(R.layout.anime_item, parent, false)
+        animeItem.isFocusable = true
+        animeItem.isFocusableInTouchMode = true
+        return ViewHolder(animeItem)
     }
 
     override fun onBindViewHolder(
@@ -24,8 +27,10 @@ class CardPresenter: Presenter() {
         item: Any?
     ) {
         val anime = item as Anime
-        val cardView = viewHolder.view as ImageCardView
-        cardView.titleText = anime.title
+        val animeImage = viewHolder.view.findViewById<ImageView>(R.id.anime_image)
+        val animeName = viewHolder.view.findViewById<TextView>(R.id.anime_name)
+        animeImage.load(anime.thumbnail)
+        animeName.text = anime.title
     }
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder) {}
