@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Akira TV</string>
     <string name="anime_image">Anime Image</string>
+    <string name="gradient_background">Gradient Background</string>
 </resources>
