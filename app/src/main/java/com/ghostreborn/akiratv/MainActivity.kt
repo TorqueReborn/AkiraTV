@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.ghostreborn.akiratv.adapter.AnimeAdapter
+import com.ghostreborn.akiratv.model.Anime
 
 class MainActivity : FragmentActivity() {
 
@@ -45,7 +47,7 @@ class MainActivity : FragmentActivity() {
         animes.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
         animes.add(Anime("One Piece", "https://wp.youtube-anime.com/s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-YCDoj1EkAxFn.jpg?w=250"))
         val adapter = AnimeAdapter(animes)
-        recycler.layoutManager = androidx.recyclerview.widget.GridLayoutManager(applicationContext, 6, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.HORIZONTAL, false)
         recycler.adapter = adapter
     }
 }

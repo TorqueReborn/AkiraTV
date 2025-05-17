@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.model
 
 data class Anime(
     val name: String,

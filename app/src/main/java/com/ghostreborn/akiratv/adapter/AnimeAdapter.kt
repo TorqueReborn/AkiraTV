@@ -1,4 +1,4 @@
-package com.ghostreborn.akiratv
+package com.ghostreborn.akiratv.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.ghostreborn.akiratv.R
+import com.ghostreborn.akiratv.model.Anime
 
 class AnimeAdapter(private val animeList: List<Anime>) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
