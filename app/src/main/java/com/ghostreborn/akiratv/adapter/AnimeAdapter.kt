@@ -14,6 +14,7 @@ import com.ghostreborn.akiratv.model.Anime
 class AnimeAdapter(
     private val animeList: List<Anime>,
     private val animeName: TextView,
+    private val animeDesc: TextView,
     private val animeBanner: ImageView
 ) :
     RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
@@ -38,7 +39,7 @@ class AnimeAdapter(
         holder.animeImage.load(anime.thumbnail)
         holder.itemView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                MainActivity.changeDesc(anime, animeName, animeBanner)
+                MainActivity.changeDesc(anime, animeName, animeDesc, animeBanner)
                 v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
             } else {
                 v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()

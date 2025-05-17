@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="corner_radius">8dp</dimen>
-    <dimen name="card_width">120dp</dimen>
-    <dimen name="card_height">180dp</dimen>
+    <dimen name="card_width">100dp</dimen>
+    <dimen name="card_height">150dp</dimen>
     <dimen name="card_text_padding">4dp</dimen>
 </resources>
