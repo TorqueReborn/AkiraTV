@@ -1,12 +1,11 @@
 package com.ghostreborn.akiratv.allAnime
 
-import android.util.Log
 import com.ghostreborn.akiratv.model.Anime
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-class DetailsByIds {
+class ConnectAllAnime {
 
     private fun query(ids: String): String {
         val variables = "\"ids\":" + "[" + ids.substring(0, ids.length - 1) + "]"
@@ -19,7 +18,7 @@ class DetailsByIds {
         return connection.inputStream.bufferedReader().use { it.readText() }
     }
 
-    fun details(idList: List<String>): ArrayList<Anime> {
+    fun connect(idList: List<String>): ArrayList<Anime> {
         val ids = StringBuilder()
         for(id in idList) {
             ids.append("\"").append(id).append("\",")

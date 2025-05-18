@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ghostreborn.akiratv.adapter.AnimeAdapter
-import com.ghostreborn.akiratv.allAnime.DetailsByIds
+import com.ghostreborn.akiratv.allAnime.ConnectAllAnime
 import com.ghostreborn.akiratv.allAnime.QueryPopular
 import com.ghostreborn.akiratv.model.Anime
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +33,7 @@ class MainActivity : FragmentActivity() {
         val recycler = findViewById<RecyclerView>(R.id.anime_recycler)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val anime = DetailsByIds().details(QueryPopular().queryPopular())
+            val anime = ConnectAllAnime().connect(QueryPopular().queryPopular())
             withContext(Dispatchers.Main) {
                 val adapter = AnimeAdapter(anime, animeTitle, animeDesc,animeBanner)
                 recycler.layoutManager =
