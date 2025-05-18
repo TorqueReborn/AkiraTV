@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AkiraTV">
         <activity
-            android:name=".DetailsActivity"
+            android:name=".ui.DetailsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -10,7 +10,7 @@ class ConnectAllAnime {
     private fun query(ids: String): String {
         val variables = "\"ids\":" + "[" + ids.substring(0, ids.length - 1) + "]"
         val queryTypes = "\$ids:[String!]!"
-        val query = "showsWithIds(ids:\$ids){name, englishName,thumbnail,banner,season}"
+        val query = "showsWithIds(ids:\$ids){_id,name,englishName,thumbnail,banner,season}"
         val url = URL("https://api.allanime.day/api?variables={$variables}&query=query($queryTypes){$query}")
         val connection = url.openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
@@ -30,6 +30,7 @@ class ConnectAllAnime {
             .getJSONArray("showsWithIds")
         for(i in 0 until shows.length()) {
             val show = shows.getJSONObject(i)
+            val id = show.getString("_id");
             val season = show.getJSONObject("season")
             var name = show.getString("englishName")
             val banner = show.getString("banner")
@@ -41,7 +42,7 @@ class ConnectAllAnime {
                 thumbnail = "https://wp.youtube-anime.com/aln.youtube-anime.com/$thumbnail"
             }
             val desc = season.getString("quarter") + " | " + season.getString("year")
-            anime.add(Anime(name, thumbnail, banner, desc))
+            anime.add(Anime(id,name, thumbnail, banner, desc))
         }
         return anime
     }

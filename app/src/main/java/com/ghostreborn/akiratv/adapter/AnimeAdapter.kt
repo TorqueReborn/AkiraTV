@@ -1,5 +1,6 @@
 package com.ghostreborn.akiratv.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.ghostreborn.akiratv.ui.DetailsActivity
 import com.ghostreborn.akiratv.MainActivity
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
@@ -37,6 +39,11 @@ class AnimeAdapter(
     override fun onBindViewHolder(holder: AnimeViewHolder, position: Int) {
         val anime = animeList[position]
         holder.animeImage.load(anime.thumbnail)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailsActivity::class.java)
+            intent.putExtra("ANIME_ID", anime.id)
+            holder.itemView.context.startActivity(intent)
+        }
         holder.itemView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 MainActivity.changeDesc(anime, animeName, animeDesc, animeBanner)
