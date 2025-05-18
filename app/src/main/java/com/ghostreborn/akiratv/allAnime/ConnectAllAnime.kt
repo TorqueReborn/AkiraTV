@@ -30,7 +30,7 @@ class ConnectAllAnime {
             .getJSONArray("showsWithIds")
         for(i in 0 until shows.length()) {
             val show = shows.getJSONObject(i)
-            val id = show.getString("_id");
+            val id = show.getString("_id")
             val season = show.getJSONObject("season")
             var name = show.getString("englishName")
             val banner = show.getString("banner")
