@@ -15,7 +15,7 @@ class ConnectAllAnime {
         val connection = url.openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
         connection.setRequestProperty("Referer", "https://allmanga.to")
-        return connection.inputStream.bufferedReader().use { it.readText() }
+        return connection.inputStream.bufferedReader().readText()
     }
 
     fun connect(idList: List<String>): ArrayList<Anime> {

@@ -12,6 +12,7 @@ import com.ghostreborn.akiratv.ui.DetailsActivity
 import com.ghostreborn.akiratv.MainActivity
 import com.ghostreborn.akiratv.R
 import com.ghostreborn.akiratv.model.Anime
+import com.ghostreborn.akiratv.ui.PlaybackActivity
 
 class AnimeAdapter(
     private val animeList: List<Anime>,
@@ -40,7 +41,7 @@ class AnimeAdapter(
         val anime = animeList[position]
         holder.animeImage.load(anime.thumbnail)
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailsActivity::class.java)
+            val intent = Intent(holder.itemView.context, PlaybackActivity::class.java)
             intent.putExtra("ANIME_ID", anime.id)
             holder.itemView.context.startActivity(intent)
         }

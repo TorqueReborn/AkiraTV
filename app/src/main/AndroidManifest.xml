@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AkiraTV">
         <activity
+            android:name=".ui.PlaybackActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.DetailsActivity"
             android:exported="false" />
         <activity

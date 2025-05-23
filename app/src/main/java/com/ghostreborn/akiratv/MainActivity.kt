@@ -1,6 +1,7 @@
 package com.ghostreborn.akiratv
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
@@ -10,6 +11,7 @@ import coil.load
 import com.ghostreborn.akiratv.adapter.AnimeAdapter
 import com.ghostreborn.akiratv.allAnime.ConnectAllAnime
 import com.ghostreborn.akiratv.allAnime.QueryPopular
+import com.ghostreborn.akiratv.allAnime.StreamAnime
 import com.ghostreborn.akiratv.model.Anime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +36,8 @@ class MainActivity : FragmentActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val anime = ConnectAllAnime().connect(QueryPopular().queryPopular())
+            val test = StreamAnime().getEncryptedUrls("ReooPAxPMsHM4KPMY", "1")
+            Log.e("TAG", test.toString())
             withContext(Dispatchers.Main) {
                 val adapter = AnimeAdapter(anime, animeTitle, animeDesc,animeBanner)
                 recycler.layoutManager =
